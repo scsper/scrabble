@@ -16,7 +16,12 @@ Started when I was a sophomore in college.  Posting here as a backup.
 	- DOUBLE_LETTER
 	- TRIPLE_WORD
 	- TRIPLE_LETTER
-
+- state, an enum:
+	- EMPTY
+	- PENDING
+	- FULL
+	- Note: this enum is not necessary...  we can have a is_permanent boolean and use that in conjunction with the Tile being null to accomplish the same thing as this check, but I think this is cleaner.
+- Tile
 
 ### Tile:
 - letter, points
