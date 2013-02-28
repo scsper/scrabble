@@ -7,6 +7,7 @@ Started when I was a sophomore in college.  Posting here as a backup.
 ### Board: singleton 
 - multi-dimensional list of board positions
 - legalBoard: boolean
+
 ##### API
 - place_tile(tile, position)
 	- places the tile in the proper board postion
