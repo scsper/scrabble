@@ -58,3 +58,9 @@ Started when I was a sophomore in college.  Posting here as a backup.
 	- swap tiles, move on the board, or pass
 	- returns the number of tiles you get back
 
+### Dictionary
+- hashmap of words
+
+##### API
+- is_word(list of tiles)
+
