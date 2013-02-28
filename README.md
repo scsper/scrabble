@@ -33,6 +33,7 @@ Started when I was a sophomore in college.  Posting here as a backup.
 ##### API
 - points(): returns the number of points, based on multiplier, state, and tile, for the turn
 
+
 ### Tile:
 - letter
 - points
@@ -44,5 +45,16 @@ Started when I was a sophomore in college.  Posting here as a backup.
 ##### API
 - draw_tiles(num)
 	- end of every turn
-- trade_tiles(list of tiles)
+- swap_tiles(list of tiles)
 - tiles_left()
+
+
+### Player
+- rack: list of tiles
+
+##### API
+- play(tile, position)
+- submit_turn(type):
+	- swap tiles, move on the board, or pass
+	- returns the number of tiles you get back
+
