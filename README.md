@@ -10,7 +10,7 @@ Started when I was a sophomore in college.  Posting here as a backup.
 
 ##### API
 - place_tile(tile, position)
-	- places the tile in the proper board postion
+	- places the tile in the proper board position
 	- sets legalBoard to true or false, based on:
 		- whether a move is fully horizontal or vertical (not both!)
 		- whether a move is connected to an existing piece (or played on the star for the first move)
@@ -30,9 +30,19 @@ Started when I was a sophomore in college.  Posting here as a backup.
 	- Note: this enum is not necessary...  we can have a is_permanent boolean and use that in conjunction with the Tile being null to accomplish the same thing as this check, but I think this is cleaner.
 - Tile
 
+##### API
+- points(): returns the number of points, based on multiplier, state, and tile, for the turn
+
 ### Tile:
-- letter, points
+- letter
+- points
 
 
 ### TileBag: singleton
-- list of tiles 
+- list of tiles
+
+##### API
+- draw_tiles(num)
+	- end of every turn
+- trade_tiles(list of tiles)
+- tiles_left()
