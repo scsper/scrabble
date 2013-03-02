@@ -1,25 +1,20 @@
 scrabble
 ========
 
-Started when I was a sophomore in college.  Posting here as a backup.  
-
-
-### Board: singleton 
+### Board: singleton
 - multi-dimensional list of board positions
-- legalBoard: boolean
 
-##### API
+##### Interaction API
 - place_tile(tile, position)
 	- places the tile in the proper board position
-	- sets legalBoard to true or false, based on:
-		- whether a move is fully horizontal or vertical (not both!)
-		- whether a move is connected to an existing piece (or played on the star for the first move)
+	- fires event that triggers "valid_turn" in the game manager
 - retrieve_tiles()
 
 
 ### BoardPosition: helper class
-- multiplier, an enum: 
-	- DOUBLE_WORD 
+- multiplier, an enum:
+	- NONE
+	- DOUBLE_WORD
 	- DOUBLE_LETTER
 	- TRIPLE_WORD
 	- TRIPLE_LETTER
@@ -30,7 +25,7 @@ Started when I was a sophomore in college.  Posting here as a backup.
 	- Note: this enum is not necessary...  we can have a is_permanent boolean and use that in conjunction with the Tile being null to accomplish the same thing as this check, but I think this is cleaner.
 - Tile
 
-##### API
+##### Interaction API
 - points(): returns the number of points, based on multiplier, state, and tile, for the turn
 
 
@@ -42,25 +37,78 @@ Started when I was a sophomore in college.  Posting here as a backup.
 ### TileBag: singleton
 - list of tiles
 
-##### API
-- draw_tiles(num)
+##### Interaction API
+- draw(num)
 	- end of every turn
-- swap_tiles(list of tiles)
-- tiles_left()
+- swap(tiles)
 
 
 ### Player
 - rack: list of tiles
+- points
+- name
 
-##### API
-- play(tile, position)
-- submit_turn(type):
+##### Interaction API
+- place(tile, position)
+- retrieve(tiles)
+- play(turn):
 	- swap tiles, move on the board, or pass
 	- returns the number of tiles you get back
 
+
 ### Dictionary
 - hashmap of words
+- perhaps an AI dictionary too, based on the level of AI
+
+##### Interaction API
+- is(word)
+
+##### Functions
+- read_file(dictionary.txt)
+
+
+### Game Manager: Singleton -- probably written in javascript
+- whose turn is it?
+- what is the state of the board? (should these be managed in the board object?)
+	- is the board valid?
+	- what tiles have been played?
+
+- valid_board(): calculates whether the turn is legal or not
+	- triggered after every tile that is placed
+- form_word(tiles): makes a word out of the tiles
+- Dictionary.is(word)
+	- if true:
+		- allocate points
+			- did the player use the whole rack
+			- count in every direction
+			- apply multipliers correctly
+		- change the board to reflect that the word played is valid
+			- update board position state
+		- update turns
+	- if false:
+		- return to the player that he did not make a valid word
+			- don't clear the board
+
+
+### Renderer
 
 ##### API
-- is_word(list of tiles)
+- render_board()
+- render_player()
+	- points
+	- name
+	- rack (showing or not)
+- render_frame()
+- render_tile_bag()
 
+
+### AI
+- reference to the board (python side board model needed)
+- rules as to what is a valid word (algorithm should cover this)
+- prefix tree of all the words
+- understanding of points
+
+##### API
+- find_word
+	- find all possibilities on the board (DAWG algorithm)
+	- keep only the highest scoring word
