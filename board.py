@@ -1,6 +1,7 @@
 from enum import Multiplier, BoardPositionState
 
 class Board:
+	board = []
 	def __init__(self):
 		board = [[0 for col in range(15)] for row in range(15)]
 		print board
