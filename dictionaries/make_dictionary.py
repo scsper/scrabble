@@ -13,7 +13,13 @@ for word in unix_file:
 	unix.add(word)
 
 
-common = twl & unix
+common_set = twl & unix
+common = []
+
+for word in common_set:
+	common.append(word)
+
+common.sort()
 
 for word in common:
 	common_file.write(word)
