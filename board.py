@@ -20,34 +20,36 @@ class Board:
 						[0,3,0,0,0,4,0,0,0,4,0,0,0,3,0],
 						[5,0,0,2,0,0,0,5,0,0,0,2,0,0,5]
 					]
-		build_board(self.board)
+		self.build_board()
 		print self.board
 
 
-	def build_board(board):
+	def build_board(self):
 		for row in range(15):
 			for col in range(15):
-				board[row][col] = BoardPosition(board[row][col])
+				self.board[row][col] = BoardPosition(self.board[row][col])
 
 
 # Board helper class
 class BoardPosition:
 	def __init__(self, value):
-		self.state = BoardPositionState.OPEN	
+		self.state = BoardPositionState.EMPTY
 		if value == 0:
+			self.name = "NONE"
 			self.multiplier = Multiplier.NONE
 		elif value == 2:
+			self.name = "DOUBLE_LETTER"
 			self.multiplier = Multiplier.DOUBLE_LETTER
 		elif value == 3:
+			self.name = "DOUBLE_WORD"
 			self.multiplier = Multiplier.DOUBLE_WORD
 		elif value == 4:
+			self.name = "TRIPLE_LETTER"
 			self.multiplier = Multiplier.TRIPLE_LETTER
 		elif value == 5: 
+			self.name = "TRIPLE_WORD"
 			self.multiplier = Multiplier.TRIPLE_WORD
 
 
 	def __str__(self):
-		return "My multiplier is " + self.multiplier + " and my state is " + self.state
-
-
-
+		return self.name + " state: " + str(self.state)
