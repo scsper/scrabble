@@ -52,7 +52,7 @@ class BoardPosition(object):
 		elif value == 4:
 			self.name = "TRIPLE_LETTER"
 			self.multiplier = Multiplier.TRIPLE_LETTER
-		elif value == 5: 
+		elif value == 5:
 			self.name = "TRIPLE_WORD"
 			self.multiplier = Multiplier.TRIPLE_WORD
 
