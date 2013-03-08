@@ -20,7 +20,6 @@ class Board(object):
 						[5,0,0,2,0,0,0,5,0,0,0,2,0,0,5]
 					]
 		self.build_board()
-		print self.board
 
 
 	def place_tile(self, tile, row, col):
@@ -32,6 +31,14 @@ class Board(object):
 		for row in xrange(15):
 			for col in xrange(15):
 				self.board[row][col] = BoardPosition(self.board[row][col])
+
+	def print_board(self):
+		for row in xrange(15):
+			print
+			for col in xrange(15):
+				print str(self.board[row][col]) + ' ',
+		print
+		print
 
 
 # Board helper class
@@ -52,7 +59,7 @@ class BoardPosition(object):
 		elif value == 4:
 			self.name = "TRIPLE_LETTER"
 			self.multiplier = Multiplier.TRIPLE_LETTER
-		elif value == 5: 
+		elif value == 5:
 			self.name = "TRIPLE_WORD"
 			self.multiplier = Multiplier.TRIPLE_WORD
 
@@ -61,6 +68,3 @@ class BoardPosition(object):
 			return self.tile.letter
 		else:
 			return str(self.multiplier)
-
-	def __str__(self):
-		return self.name + " state: " + str(self.state)
