@@ -32,7 +32,7 @@ scrabble
 ### Tile:
 - letter
 - points
-
+- account for blank tiles at some point or another
 
 ### TileBag: singleton
 - list of tiles

@@ -1,7 +1,6 @@
 from enum import Multiplier, BoardPositionState
 
-class Board:
-	board = []
+class Board(object):
 	def __init__(self):
 		self.board = [
 						[5,0,0,2,0,0,0,5,0,0,0,2,0,0,5],
@@ -24,16 +23,23 @@ class Board:
 		print self.board
 
 
+	def place_tile(self, tile, row, col):
+		self.board[row][col].state = BoardPosition.PENDING
+		self.board[row][col].tile = tile
+
+
 	def build_board(self):
-		for row in range(15):
-			for col in range(15):
+		for row in xrange(15):
+			for col in xrange(15):
 				self.board[row][col] = BoardPosition(self.board[row][col])
 
 
 # Board helper class
-class BoardPosition:
+class BoardPosition(object):
 	def __init__(self, value):
 		self.state = BoardPositionState.EMPTY
+		self.tile = None
+
 		if value == 0:
 			self.name = "NONE"
 			self.multiplier = Multiplier.NONE
