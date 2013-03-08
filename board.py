@@ -56,6 +56,11 @@ class BoardPosition(object):
 			self.name = "TRIPLE_WORD"
 			self.multiplier = Multiplier.TRIPLE_WORD
 
+	def __repr__(self):
+		if(self.tile):
+			return self.tile.letter
+		else:
+			return str(self.multiplier)
 
 	def __str__(self):
 		return self.name + " state: " + str(self.state)
