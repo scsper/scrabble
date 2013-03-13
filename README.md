@@ -8,7 +8,8 @@ scrabble
 - place_tile(tile, position)
 	- places the tile in the proper board position
 	- fires event that triggers "valid_turn" in the game manager
-- retrieve_tiles()
+- retrieve_tile(position)
+- retrieve_all()
 
 
 ### BoardPosition: helper class
