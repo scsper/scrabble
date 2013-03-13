@@ -23,7 +23,7 @@ class Board(object):
 
 
 	def place_tile(self, tile, row, col):
-		self.board[row][col].state = BoardPosition.PENDING
+		self.board[row][col].state = BoardPositionState.PENDING
 		self.board[row][col].tile = tile
 
 
@@ -68,3 +68,7 @@ class BoardPosition(object):
 			return self.tile.letter
 		else:
 			return str(self.multiplier)
+
+	# for testing purposes
+	def __eq__(self, other):
+		return self.state == other.state and self.name == other.name
