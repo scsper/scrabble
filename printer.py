@@ -1,6 +1,6 @@
 from board import Board
 from tilebag import Tilebag
 b = Board()
-tb = Tilebag()
+tb = Tilebag("tileset.txt")
 
 b.print_board()
