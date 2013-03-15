@@ -1,8 +1,8 @@
 from tile import Tile
 class Tilebag(object):
-	def __init__(self):
+	def __init__(self, filepath):
 		self.tiles = []
-		with open("tileset.txt") as f:
+		with open(filepath) as f:
 			for line in f:
 				line = line.split()
 				letter = line[0]
