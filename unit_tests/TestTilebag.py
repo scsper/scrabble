@@ -61,7 +61,7 @@ class TestTilebag(unittest.TestCase):
         self.assertTrue(len(self.tilebag.tiles) == 2, "ERROR: wrong number of tiles left in tilebag")
 
 
-    def test_draw_end_of_tilebag(self):
+    def test_draw_end_tilebag(self):
         drawnTiles = self.tilebag.draw(7)
 
         for tile in drawnTiles:
@@ -83,10 +83,30 @@ class TestTilebag(unittest.TestCase):
 
 
     def test_swap(self):
-        drawnTiles = self.tilebag.swap(tiles)
-        # pass in a list of tiles
-            # check that those tiles get placed into the tilebag
-        # get the same number of tiles in return
+        d = Tile('d', 2)
+        e = Tile('e', 1)
+        swapTiles = [d, e]
+        drawnTiles = self.tilebag.swap(swapTiles)
+
+        self.assertTrue(len(drawnTiles) == 2, "ERROR: tiles that the user gets in return should match the number swapped")
+
+        self.assertTrue(self.tilebag.tiles.index(d) > -1, "ERROR: d was not found in the tilebag")
+        self.assertTrue(self.tilebag.tiles.index(e) > -1, "ERROR: e was not found in the tilebag")
+
+
+    def test_swap_end_tilebag(self):
+        d = Tile('d', 2)
+        e = Tile('e', 1)
+        f = Tile('f', 4)
+        g = Tile('g', 3)
+        h = Tile('h', 4)
+        i = Tile('i', 1)
+        j = Tile('j', 8)
+
+        swapTiles = [d, e, f, g, h, i, j]
+
+
+
 
 
 if __name__ == '__main__':

@@ -42,7 +42,8 @@ scrabble
 - draw(num)
 	- end of every turn
 - swap(tiles)
-
+	- what happens when there aren't enough tiles?
+	- what should be returned?
 
 ### Player
 - rack: list of tiles
