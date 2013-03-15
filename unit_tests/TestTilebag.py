@@ -104,6 +104,10 @@ class TestTilebag(unittest.TestCase):
         j = Tile('j', 8)
 
         swapTiles = [d, e, f, g, h, i, j]
+        drawnTiles = self.tilebag.swap(swapTiles)
+
+        self.assertTrue(len(drawnTiles) == 0, "ERROR: when swapTiles > num of tiles in the bag, you should not draw tiles")
+        self.assertTrue(True == False, "ERROR: place holder for figuring out what to return in this case"
 
 
 
