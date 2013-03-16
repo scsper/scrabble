@@ -11,3 +11,7 @@ class BoardPositionState(object):
 	EMPTY = 0
 	PENDING = 1
 	FULL = 2
+
+
+class ErrorCodes(object):
+    SWAP = 0

@@ -1,5 +1,7 @@
 import unittest
 from tilebag import Tilebag
+from tile import Tile
+from enum import ErrorCodes
 
 class TestTilebag(unittest.TestCase):
     def setUp(self):
@@ -10,6 +12,7 @@ class TestTilebag(unittest.TestCase):
         a = 0
         b = 0
         c = 0
+        sortedTiles = sorted(self.tilebag.tiles)
         for tile in self.tilebag.tiles:
             if tile.letter == 'a' and tile.points == 1:
                 a += 1
@@ -24,6 +27,7 @@ class TestTilebag(unittest.TestCase):
         self.assertTrue(a == 2, "ERROR: wrong number of As")
         self.assertTrue(b == 1, "ERROR: wrong number of Bs")
         self.assertTrue(c == 3, "ERROR: wrong number of Cs")
+        self.assertTrue(sortedTiles != self.tilebag.tiles, "ERROR: the tilebag was not shuffled.  this may, very rarely, fail when it should succeed")
 
 
     def test_draw(self):
@@ -62,6 +66,10 @@ class TestTilebag(unittest.TestCase):
 
 
     def test_draw_end_tilebag(self):
+        a = 0
+        b = 0
+        c = 0
+
         drawnTiles = self.tilebag.draw(7)
 
         for tile in drawnTiles:
@@ -106,11 +114,7 @@ class TestTilebag(unittest.TestCase):
         swapTiles = [d, e, f, g, h, i, j]
         drawnTiles = self.tilebag.swap(swapTiles)
 
-        self.assertTrue(len(drawnTiles) == 0, "ERROR: when swapTiles > num of tiles in the bag, you should not draw tiles")
-        self.assertTrue(True == False, "ERROR: place holder for figuring out what to return in this case"
-
-
-
+        self.assertTrue(drawnTiles == ErrorCodes.SWAP, "ERROR: when swapTiles > num of tiles in the bag, you should not draw tiles")
 
 
 if __name__ == '__main__':
