@@ -2,7 +2,7 @@ import unittest
 from tile import Tile
 
 
-class TestSequenceFunctions(unittest.TestCase):
+class TestTile(unittest.TestCase):
     def test_constructor(self):
         tile = Tile('a', 1)
 

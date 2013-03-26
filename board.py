@@ -23,14 +23,22 @@ class Board(object):
 
 
     def place_tile(self, tile, row, col):
-        self.board[row][col].state = BoardPositionState.PENDING
-        self.board[row][col].tile = tile
+        if(self.board[row][col].state == BoardPositionState.EMPTY):
+            self.board[row][col].state = BoardPositionState.PENDING
+            self.board[row][col].tile = tile
+            return True
+        else:
+            return False
 
 
     def retrieve_tile(self, row, col):
-        self.board[row][col].state = BoardPositionState.EMPTY
         retrieved = self.board[row][col].tile
-        self.board[row][col].tile = None
+
+        if(retrieved and self.board[row][col].state is BoardPositionState.PENDING):
+            self.board[row][col].state = BoardPositionState.EMPTY
+            self.board[row][col].tile = None
+        else:
+            return False
 
         return retrieved
 

@@ -4,7 +4,7 @@ from tile import Tile
 from enum import Multiplier, BoardPositionState
 
 
-class TestSequenceFunctions(unittest.TestCase):
+class TestBoard(unittest.TestCase):
     def setUp(self):
         self.b = Board()
 
@@ -21,9 +21,18 @@ class TestSequenceFunctions(unittest.TestCase):
 
     def test_place_tile(self):
         tile = Tile('a', 1)
-        self.b.place_tile(tile, 0, 0)
+        isValid = self.b.place_tile(tile, 0, 0)
         self.assertTrue(self.b.board[0][0].state == BoardPositionState.PENDING)
         self.assertTrue(self.b.board[0][0].tile == tile)
+        self.assertTrue(isValid)
+
+        second_tile = Tile('b', 4)
+        self.b.board[9][9].state = BoardPositionState.FULL
+        isValid = self.b.place_tile(second_tile, 9, 9)
+        self.assertTrue(not isValid)
+
+        isValid = self.b.place_tile(second_tile, 0, 0)
+        self.assertTrue(not isValid)
 
 
     def test_retrieve_tile(self):
@@ -34,6 +43,14 @@ class TestSequenceFunctions(unittest.TestCase):
         self.assertTrue(retrieved == tile)
         self.assertTrue(self.b.board[4][8].state == BoardPositionState.EMPTY)
         self.assertTrue(self.b.board[4][8].tile == None)
+
+    def test_retrieve_tile_full(self):
+        tile = Tile('a', 1)
+        self.b.place_tile(tile, 4, 8)
+        self.b.board[4][8].state = BoardPositionState.FULL
+
+        retrieved = self.b.retrieve_tile(4, 8)
+        self.assertTrue(not retrieved)
 
 
     def test_retrieve_all(self):
