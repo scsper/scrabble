@@ -84,16 +84,5 @@ class TestPlayer(unittest.TestCase):
         self.assertTrue(len(self.player.rack) == 4)
         self.assertTrue(self.player.rack.index(tileB)) # should return something, not throw an exception
 
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
     unittest.main()
