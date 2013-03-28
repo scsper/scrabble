@@ -68,6 +68,9 @@ class TestManager(unittest.TestCase):
 
         self.b.board[2][3].state = BoardPositionState.FULL
 
+        self.manager.check_direction()
+        self.assertTrue(self.manager.check_connectivity())
+
 
     def test_connectivity_end(self):
         a = Tile('a', 1)
@@ -83,6 +86,9 @@ class TestManager(unittest.TestCase):
         self.b.place_tile(e, 5, 1)
 
         self.b.board[5][1].state = BoardPositionState.FULL
+        self.manager.check_direction()
+
+        self.assertTrue(self.manager.check_connectivity())
 
 
     def test_connectivity_beginning(self):
@@ -99,6 +105,9 @@ class TestManager(unittest.TestCase):
         self.b.place_tile(e, 5, 1)
 
         self.b.board[1][1].state = BoardPositionState.FULL
+        self.manager.check_direction()
+
+        self.assertTrue(self.manager.check_connectivity())
 
 
     def test_connectivity_two_anchor_consecutive(self):
@@ -120,6 +129,9 @@ class TestManager(unittest.TestCase):
 
         self.b.board[3][1].state = BoardPositionState.FULL
         self.b.board[4][1].state = BoardPositionState.FULL
+        self.manager.check_direction()
+
+        self.assertTrue(self.manager.check_connectivity())
 
 
     def test_connectivity_two_anchor_gap(self):
@@ -139,6 +151,9 @@ class TestManager(unittest.TestCase):
 
         self.b.board[1][2].state = BoardPositionState.FULL
         self.b.board[1][5].state = BoardPositionState.FULL
+        self.manager.check_direction()
+
+        self.assertTrue(self.manager.check_connectivity())
 
 
     def test_connectivity_gap(self):
@@ -155,6 +170,9 @@ class TestManager(unittest.TestCase):
         self.b.place_tile(e, 2, 6)
 
         self.b.board[2][3].state = BoardPositionState.FULL
+        self.manager.check_direction()
+
+        self.assertFalse(self.manager.check_connectivity())
 
 
     def test_connectivity_no_anchor(self):
@@ -163,8 +181,10 @@ class TestManager(unittest.TestCase):
         c = Tile('c', 3)
         d = Tile('d', 4)
 
-        self.b.place_tile(a, 1, 1)
-        self.b.place_tile(b, 2, 1)
-        self.b.place_tile(c, 2, 2)
-        self.b.place_tile(d, 2, 3)
+        self.b.place_tile(a, 2, 1)
+        self.b.place_tile(b, 2, 2)
+        self.b.place_tile(c, 2, 3)
+        self.b.place_tile(d, 2, 4)
 
+        self.manager.check_direction()
+        self.assertFalse(self.manager.check_connectivity())
