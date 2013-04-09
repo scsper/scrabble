@@ -100,3 +100,54 @@ class Manager(object):
             first += 1
 
         return gaps
+
+
+    def form_words(self):
+        tiles, xCoords, yCoords = zip(*self.xytiles) # unzip the tuple
+        isBeginning = True
+        anchorWord = tiles[0].letter
+        tempWord = ""
+        words = []
+        tempIndex = 0
+        anchorIndex = 0
+
+        if(self.row):
+            tempIndex = yCoords[0]
+            anchorIndex = yCoords[0]
+            x = xCoords[0]
+
+            # find the "main" word
+            while( (anchorIndex - 1) > 0 and self.b.board[x][anchorIndex - 1].state is not BoardPositionState.EMPTY):
+                anchorIndex -= 1
+                anchorWord = self.b.board[x][anchorIndex].tile.letter + anchorWord # put it at the beginning of the string
+
+            anchorIndex = yCoords[0]
+
+            while( (anchorIndex + 1) < 15 and self.b.board[x][anchorIndex + 1].state is not BoardPositionState.EMPTY):
+                anchorIndex += 1
+                anchorWord = anchorWord + self.b.board[x][anchorIndex].tile.letter # put it at end of the string
+
+            words.append(anchorWord)
+
+            for y in yCoords:
+                anchorIndex = y
+
+                # scan up
+                tempIndex = x
+                tempWord = self.b.board[x][y].tile.letter
+                while( (tempIndex - 1) > 0 and self.b.board[tempIndex - 1][y].state is not BoardPositionState.EMPTY):
+                    tempIndex -= 1
+                    tempWord = self.b.board[tempIndex][y].tile.letter + tempWord # put it at the beginning of the string
+
+                # scan down
+                tempIndex = x
+                while( (tempIndex + 1) < 15 and self.b.board[tempIndex + 1][y].state is not BoardPositionState.EMPTY):
+                    tempIndex += 1
+                    tempWord = tempWord + self.b.board[tempIndex][y].tile.letter # put it at the end of string
+
+                if(len(tempWord) > 1):
+                    words.append(tempWord)
+
+                tempWord = ""
+
+        return words
