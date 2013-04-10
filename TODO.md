@@ -1,5 +1,5 @@
 TODO.md
 ========
 
-- do a "usability" study with the flow of the game
-- break functions / classes into python / javascript / html5
+- test the edges of the board for word formation
+- when going in two directions, the _find_gaps function sometimes infinite loops

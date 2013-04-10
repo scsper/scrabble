@@ -344,7 +344,7 @@ class TestManager(unittest.TestCase):
         e = Tile('e', 4)
         d = Tile('d', 1)
         r = Tile('r', 2)
-        ee = Tile('e', 3)
+        aa = Tile('a', 3)
         m = Tile('m', 4)
 
         self.b.place_tile(s, 9, 4)
@@ -353,7 +353,7 @@ class TestManager(unittest.TestCase):
         self.b.place_tile(e, 9, 7)
         self.b.place_tile(d, 7, 7)
         self.b.place_tile(r, 8, 7)
-        self.b.place_tile(ee, 10, 7)
+        self.b.place_tile(aa, 10, 7)
         self.b.place_tile(m, 11, 7)
 
         self.b.board[9][4].state = BoardPositionState.FULL
@@ -430,8 +430,8 @@ class TestManager(unittest.TestCase):
         words = self.manager.form_words()
 
         self.assertTrue(len(words) == 2, "There should have been two words found")
-        self.assertTrue(words[0] == "rust", "'rust' was not found")
-        self.assertTrue(words[1] == "rage", "'rage' was not found")
+        self.assertTrue(words[0] == "rage", "'rage' was not found")
+        self.assertTrue(words[1] == "rust", "'rust' was not found")
 
 
     def test_word_multi_connection(self):
@@ -468,10 +468,10 @@ class TestManager(unittest.TestCase):
         words = self.manager.form_words()
 
         self.assertTrue(len(words) == 4, "There should have been four words found")
-        self.assertTrue(words[0] == "hose", "'hose' was not found")
-        self.assertTrue(words[1] == "ah", "'ah' was not found")
-        self.assertTrue(words[2] == "to", "'to' was not found")
-        self.assertTrue(words[3] == "es", "'es' was not found")
+        self.assertTrue(words[0] == "ah", "'ah' was not found")
+        self.assertTrue(words[1] == "to", "'to' was not found")
+        self.assertTrue(words[2] == "es", "'es' was not found")
+        self.assertTrue(words[3] == "hose", "'hose' was not found")
 
 
     def test_word_attach(self):

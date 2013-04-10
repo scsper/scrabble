@@ -54,7 +54,6 @@ class Manager(object):
                         return False
 
             if(not foundAnchor):
-                # look at the beginning of the word
                 if(yCoords[0] != 0): # don't go off the top of the board
                     if(self.b.board[row][yCoords[0] - 1].state == BoardPositionState.FULL):
                         foundAnchor = True
@@ -64,7 +63,6 @@ class Manager(object):
                         foundAnchor = True
 
             return foundAnchor
-
         else:
             col = yCoords[0]
             gaps = self._find_gaps(xCoords)
@@ -77,7 +75,6 @@ class Manager(object):
                         return False
 
             if(not foundAnchor):
-                # look at the beginning of the word
                 if(xCoords[0] != 0): # don't go off the top of the board
                     if(self.b.board[xCoords[0] - 1][col].state == BoardPositionState.FULL):
                         foundAnchor = True
@@ -102,52 +99,54 @@ class Manager(object):
         return gaps
 
 
+    def _scan(self, direction, x, y):
+        word = ""
+
+        if direction is 'up':
+            while( x != 0 and self.b.board[x - 1][y].state is not BoardPositionState.EMPTY):
+                x -= 1
+                word = self.b.board[x][y].tile.letter + word # put it at the beginning of the string
+        elif direction is 'down':
+            while( x != 14 and self.b.board[x + 1][y].state is not BoardPositionState.EMPTY):
+                x += 1
+                word = word + self.b.board[x][y].tile.letter # put it at the end of string
+        elif direction is 'left':
+            while( y != 0 and self.b.board[x][y - 1].state is not BoardPositionState.EMPTY):
+                y -= 1
+                word = self.b.board[x][y].tile.letter + word # put it at the beginning of the string
+        elif direction is 'right':
+            while( y != 14 and self.b.board[x][y + 1].state is not BoardPositionState.EMPTY):
+                y += 1
+                word = word + self.b.board[x][y].tile.letter # put it at end of the string
+        else:
+            assert(false, "invalid direction passed into '_scan()'.  value should be up down left or right.")
+
+        return word
+
+
     def form_words(self):
         tiles, xCoords, yCoords = zip(*self.xytiles) # unzip the tuple
-        isBeginning = True
-        anchorWord = tiles[0].letter
-        tempWord = ""
         words = []
-        tempIndex = 0
-        anchorIndex = 0
+        y = yCoords[0]
+        x = xCoords[0]
 
         if(self.row):
-            tempIndex = yCoords[0]
-            anchorIndex = yCoords[0]
-            x = xCoords[0]
-
-            # find the "main" word
-            while( (anchorIndex - 1) > 0 and self.b.board[x][anchorIndex - 1].state is not BoardPositionState.EMPTY):
-                anchorIndex -= 1
-                anchorWord = self.b.board[x][anchorIndex].tile.letter + anchorWord # put it at the beginning of the string
-
-            anchorIndex = yCoords[0]
-
-            while( (anchorIndex + 1) < 15 and self.b.board[x][anchorIndex + 1].state is not BoardPositionState.EMPTY):
-                anchorIndex += 1
-                anchorWord = anchorWord + self.b.board[x][anchorIndex].tile.letter # put it at end of the string
-
-            words.append(anchorWord)
+            anchorWord = self._scan('left', x, y) + tiles[0].letter + self._scan('right', x, y)
 
             for y in yCoords:
-                anchorIndex = y
+                tempWord = self._scan('up', x, y) + self.b.board[x][y].tile.letter + self._scan('down', x, y)
 
-                # scan up
-                tempIndex = x
-                tempWord = self.b.board[x][y].tile.letter
-                while( (tempIndex - 1) > 0 and self.b.board[tempIndex - 1][y].state is not BoardPositionState.EMPTY):
-                    tempIndex -= 1
-                    tempWord = self.b.board[tempIndex][y].tile.letter + tempWord # put it at the beginning of the string
+                if(len(tempWord) > 1):
+                    words.append(tempWord)
+        else:
+            anchorWord = self._scan('up', x, y) + tiles[0].letter + self._scan('down', x, y)
 
-                # scan down
-                tempIndex = x
-                while( (tempIndex + 1) < 15 and self.b.board[tempIndex + 1][y].state is not BoardPositionState.EMPTY):
-                    tempIndex += 1
-                    tempWord = tempWord + self.b.board[tempIndex][y].tile.letter # put it at the end of string
+            for x in xCoords:
+                tempWord = self._scan('left', x, y) + self.b.board[x][y].tile.letter + self._scan('right', x, y)
 
                 if(len(tempWord) > 1):
                     words.append(tempWord)
 
-                tempWord = ""
 
+        words.append(anchorWord)
         return words
