@@ -7,6 +7,7 @@ class Manager(object):
         self.b = board
         self.xytiles = [] # a list of tuples containing the tile and xy coordinates of every thing played this turn
 
+
     def get_tiles_and_positions(self):
         self.xytiles = []
 
@@ -56,11 +57,15 @@ class Manager(object):
             if(not foundAnchor):
                 if(yCoords[0] != 0): # don't go off the top of the board
                     if(self.b.board[row][yCoords[0] - 1].state == BoardPositionState.FULL):
-                        foundAnchor = True
+                        return True
 
                 if(yCoords[-1] != 14): # don't go off the bottom of the board
                     if(self.b.board[row][yCoords[-1] + 1].state == BoardPositionState.FULL):
-                        foundAnchor = True
+                        return True
+
+                for col in yCoords:
+                    if(self._scan('up', row, col) or self._scan('down', row, col)):
+                        return True
 
             return foundAnchor
         else:
@@ -82,6 +87,10 @@ class Manager(object):
                 if(xCoords[-1] != 14): # don't go off the bottom of the board
                     if(self.b.board[xCoords[-1] + 1][col].state == BoardPositionState.FULL):
                         foundAnchor = True
+
+                for row in xCoords:
+                    if(self._scan('up', row, col) or self._scan('down', row, col)):
+                        return True
 
             return foundAnchor
 
@@ -146,7 +155,6 @@ class Manager(object):
 
                 if(len(tempWord) > 1):
                     words.append(tempWord)
-
 
         words.append(anchorWord)
         return words
