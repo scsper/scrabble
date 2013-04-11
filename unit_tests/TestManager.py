@@ -304,14 +304,14 @@ class TestManager(unittest.TestCase):
 
 
     def test_word_row(self):
-        b = Tile('b', 1)
-        a = Tile('a', 2)
-        d = Tile('d', 3)
-        g = Tile('g', 4)
+        b = Tile('b', 3)
+        a = Tile('a', 1)
+        d = Tile('d', 2)
+        g = Tile('g', 2)
         e = Tile('e', 1)
-        r = Tile('r', 2)
-        ee = Tile('e', 3)
-        m = Tile('m', 4)
+        r = Tile('r', 1)
+        ee = Tile('e', 1)
+        m = Tile('m', 3)
 
         self.b.place_tile(b, 6, 4)
         self.b.place_tile(a, 7, 4)
@@ -331,7 +331,12 @@ class TestManager(unittest.TestCase):
         self.manager.check_direction()
         self.manager.check_connectivity()
 
-        words = self.manager.form_words()
+        wordsAndPoints = self.manager.form_words()
+        words, points, garbage = zip(*wordsAndPoints) # unzip the tuple
+        print words
+
+        print points
+
 
         self.assertTrue(len(words) == 1, "There should have only been one word found")
         self.assertTrue(words[0] == "ream", "'ream' was not found")
@@ -339,13 +344,13 @@ class TestManager(unittest.TestCase):
 
     def test_word_col(self):
         s = Tile('s', 1)
-        a = Tile('a', 2)
-        g = Tile('g', 3)
-        e = Tile('e', 4)
-        d = Tile('d', 1)
-        r = Tile('r', 2)
-        aa = Tile('a', 3)
-        m = Tile('m', 4)
+        a = Tile('a', 1)
+        g = Tile('g', 2)
+        e = Tile('e', 1)
+        d = Tile('d', 2)
+        r = Tile('r', 1)
+        aa = Tile('a', 1)
+        m = Tile('m', 3)
 
         self.b.place_tile(s, 9, 4)
         self.b.place_tile(a, 9, 5)
@@ -364,21 +369,27 @@ class TestManager(unittest.TestCase):
 
         self.manager.check_direction()
         self.manager.check_connectivity()
-        words = self.manager.form_words()
+        wordsAndPoints = self.manager.form_words()
+
+        words, points, garbage = zip(*wordsAndPoints) # unzip the tuple
+        print words
+
+        print points
+
 
         self.assertTrue(len(words) == 1, "There should have only been one word found")
         self.assertTrue(words[0] == "dream", "'dream' was not found")
 
 
     def test_word_add_s(self):
-        a = Tile('a', 2)
-        g = Tile('g', 3)
-        e = Tile('e', 4)
+        a = Tile('a', 1)
+        g = Tile('g', 2)
+        e = Tile('e', 1)
 
-        r = Tile('r', 2)
-        u = Tile('u', 4)
+        r = Tile('r', 1)
+        u = Tile('u', 1)
         s = Tile('s', 1)
-        ee = Tile('e', 3)
+        ee = Tile('e', 1)
 
         self.b.place_tile(a, 6, 5)
         self.b.place_tile(g, 6, 6)
@@ -395,7 +406,12 @@ class TestManager(unittest.TestCase):
 
         self.manager.check_direction()
         self.manager.check_connectivity()
-        words = self.manager.form_words()
+        wordsAndPoints = self.manager.form_words()
+        words, points, garbage = zip(*wordsAndPoints) # unzip the tuple
+        print words
+
+        print points
+
 
         self.assertTrue(len(words) == 2, "There should have been two words found")
         self.assertTrue(words[0] == "ages", "'ages' was not found")
@@ -403,14 +419,14 @@ class TestManager(unittest.TestCase):
 
 
     def test_word_add_prefix(self):
-        a = Tile('a', 2)
-        g = Tile('g', 3)
-        e = Tile('e', 4)
+        a = Tile('a', 1)
+        g = Tile('g', 2)
+        e = Tile('e', 1)
 
-        r = Tile('r', 2)
-        u = Tile('u', 4)
+        r = Tile('r', 1)
+        u = Tile('u', 1)
         s = Tile('s', 1)
-        t = Tile('t', 3)
+        t = Tile('t', 1)
 
         self.b.place_tile(a, 6, 3)
         self.b.place_tile(g, 7, 3)
@@ -427,7 +443,10 @@ class TestManager(unittest.TestCase):
 
         self.manager.check_direction()
         self.manager.check_connectivity()
-        words = self.manager.form_words()
+        wordsAndPoints = self.manager.form_words()
+        words, points, garbage = zip(*wordsAndPoints) # unzip the tuple
+        print words
+        print points
 
         self.assertTrue(len(words) == 2, "There should have been two words found")
         self.assertTrue(words[0] == "rage", "'rage' was not found")
@@ -435,16 +454,16 @@ class TestManager(unittest.TestCase):
 
 
     def test_word_multi_connection(self):
-        g = Tile('g', 3)
-        r = Tile('r', 2)
-        a = Tile('a', 2)
-        t = Tile('t', 3)
-        e = Tile('e', 4)
+        g = Tile('g', 2)
+        r = Tile('r', 1)
+        a = Tile('a', 1)
+        t = Tile('t', 1)
+        e = Tile('e', 1)
 
         h = Tile('h', 4)
-        o = Tile('o', 4)
+        o = Tile('o', 1)
         s = Tile('s', 1)
-        ee = Tile('e', 4)
+        ee = Tile('e', 1)
 
         self.b.place_tile(g, 8, 3)
         self.b.place_tile(r, 8, 4)
@@ -465,7 +484,10 @@ class TestManager(unittest.TestCase):
 
         self.manager.check_direction()
         self.manager.check_connectivity()
-        words = self.manager.form_words()
+        wordsAndPoints = self.manager.form_words()
+        words, points, garbage = zip(*wordsAndPoints) # unzip the tuple
+        print words
+        print points
 
         self.assertTrue(len(words) == 4, "There should have been four words found")
         self.assertTrue(words[0] == "ah", "'ah' was not found")
@@ -475,14 +497,14 @@ class TestManager(unittest.TestCase):
 
 
     def test_word_attach(self):
-        r = Tile('r', 2)
-        a = Tile('a', 2)
-        n = Tile('n', 3)
-        k = Tile('k', 4)
+        r = Tile('r', 1)
+        a = Tile('a', 1)
+        n = Tile('n', 1)
+        k = Tile('k', 5)
 
-        i = Tile('i', 4)
-        n = Tile('n', 4)
-        g = Tile('g', 1)
+        i = Tile('i', 1)
+        n = Tile('n', 1)
+        g = Tile('g', 2)
 
         self.b.place_tile(r, 5, 4)
         self.b.place_tile(a, 5, 5)
@@ -500,7 +522,10 @@ class TestManager(unittest.TestCase):
         self.manager.check_direction()
         self.manager.check_connectivity()
 
-        words = self.manager.form_words()
+        wordsAndPoints = self.manager.form_words()
+        words, points, garbage = zip(*wordsAndPoints) # unzip the tuple
+        print words
+        print points
 
         self.assertTrue(len(words) == 1, "There should have only been one word found")
         self.assertTrue(words[0] == "ranking", "'ranking' was not found")

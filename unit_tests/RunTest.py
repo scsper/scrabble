@@ -14,11 +14,21 @@ dictionarySuite = unittest.TestLoader().loadTestsFromTestCase(TestDictionary)
 managerSuite = unittest.TestLoader().loadTestsFromTestCase(TestManager)
 
 
+print "\nRunning the board suite... "
+unittest.TextTestRunner(verbosity=1).run(boardSuite)
 
-unittest.TextTestRunner(verbosity=2).run(boardSuite)
-unittest.TextTestRunner(verbosity=2).run(tileSuite)
-unittest.TextTestRunner(verbosity=2).run(tilebagSuite)
-unittest.TextTestRunner(verbosity=2).run(playerSuite)
-unittest.TextTestRunner(verbosity=2).run(dictionarySuite)
+print "\n\nRunning the tile suite... "
+unittest.TextTestRunner(verbosity=1).run(tileSuite)
+
+print "\n\nRunning the tilebag suite... "
+unittest.TextTestRunner(verbosity=1).run(tilebagSuite)
+
+print "\n\nRunning the player suite... "
+unittest.TextTestRunner(verbosity=1).run(playerSuite)
+
+print "\n\nRunning the dictionary suite... "
+unittest.TextTestRunner(verbosity=1).run(dictionarySuite)
+
+print "\n\nRunning the manager suite... "
 unittest.TextTestRunner(verbosity=2).run(managerSuite)
 

@@ -109,52 +109,115 @@ class Manager(object):
 
 
     def _scan(self, direction, x, y):
-        word = ""
+        tiles = []
 
         if direction is 'up':
             while( x != 0 and self.b.board[x - 1][y].state is not BoardPositionState.EMPTY):
                 x -= 1
-                word = self.b.board[x][y].tile.letter + word # put it at the beginning of the string
+                tiles.insert(0, self.b.board[x][y].tile)
         elif direction is 'down':
             while( x != 14 and self.b.board[x + 1][y].state is not BoardPositionState.EMPTY):
                 x += 1
-                word = word + self.b.board[x][y].tile.letter # put it at the end of string
+                tiles.append(self.b.board[x][y].tile)
         elif direction is 'left':
             while( y != 0 and self.b.board[x][y - 1].state is not BoardPositionState.EMPTY):
                 y -= 1
-                word = self.b.board[x][y].tile.letter + word # put it at the beginning of the string
+                tiles.insert(0, self.b.board[x][y].tile)
         elif direction is 'right':
             while( y != 14 and self.b.board[x][y + 1].state is not BoardPositionState.EMPTY):
                 y += 1
-                word = word + self.b.board[x][y].tile.letter # put it at end of the string
+                tiles.append(self.b.board[x][y].tile)
+
         else:
             assert(false, "invalid direction passed into '_scan()'.  value should be up down left or right.")
 
-        return word
+        return tiles
 
 
     def form_words(self):
         tiles, xCoords, yCoords = zip(*self.xytiles) # unzip the tuple
-        words = []
+        wordsAndPoints = []
         y = yCoords[0]
         x = xCoords[0]
+        anchorTiles = []
 
         if(self.row):
-            anchorWord = self._scan('left', x, y) + tiles[0].letter + self._scan('right', x, y)
+            anchorTiles.extend(self._scan('left', x, y))
+            anchorTiles.append(tiles[0])
+            anchorTiles.extend(self._scan('right', x, y))
 
             for y in yCoords:
-                tempWord = self._scan('up', x, y) + self.b.board[x][y].tile.letter + self._scan('down', x, y)
+                tempTiles = []
+                tempTiles.extend(self._scan('up', x, y))
+                tempTiles.append(self.b.board[x][y].tile)
+                tempTiles.extend(self._scan('down', x, y))
 
-                if(len(tempWord) > 1):
-                    words.append(tempWord)
+                if(len(tempTiles) > 1):
+                    word = self.tiles_to_string(tempTiles)
+                    points = self.calculate_points(tempTiles, [self.b.board[x][y].multiplier], [self.b.board[x][y].tile])
+                    wordsAndPoints.append((word, points, 0))
         else:
-            anchorWord = self._scan('up', x, y) + tiles[0].letter + self._scan('down', x, y)
+            anchorTiles.extend(self._scan('up', x, y))
+            anchorTiles.append(tiles[0])
+            anchorTiles.extend(self._scan('down', x, y))
 
             for x in xCoords:
-                tempWord = self._scan('left', x, y) + self.b.board[x][y].tile.letter + self._scan('right', x, y)
+                tempTiles = []
+                tempTiles.extend(self._scan('left', x, y))
+                tempTiles.append(self.b.board[x][y].tile)
+                tempTiles.extend(self._scan('right', x, y))
 
-                if(len(tempWord) > 1):
-                    words.append(tempWord)
+                if(len(tempTiles) > 1):
+                    word = self.tiles_to_string(tempTiles)
+                    points = self.calculate_points(tempTiles, [self.b.board[x][y].multiplier], [self.b.board[x][y].tile])
+                    wordsAndPoints.append((word, points, 0))
 
-        words.append(anchorWord)
-        return words
+        word = self.tiles_to_string(anchorTiles)
+        points = self.calculate_points(anchorTiles, self.get_anchor_multipliers(xCoords, yCoords), tiles)
+        wordsAndPoints.append((word, points, 0))
+
+        return wordsAndPoints
+
+
+    def tiles_to_string(self, tiles):
+        word = ""
+        for tile in tiles:
+            word = word + tile.letter
+
+        return word
+
+
+    def calculate_points(self, tiles, multipliers, pendingTiles):
+        points = 0
+        multiplier = 1
+
+        if(len(multipliers) != len(pendingTiles)):
+            assert(False, "calculate_points(): pending tiles and multipliers should always have the same length")
+
+        for tile in tiles:
+            points += tile.points
+
+        for i in xrange(len(multipliers)):
+            if(multipliers[i] is Multiplier.DOUBLE_LETTER):
+                points += tiles[i].points
+            elif(multipliers[i] is Multiplier.TRIPLE_LETTER):
+                points += tiles[i].points * 2
+            elif(multipliers[i] is Multiplier.DOUBLE_WORD):
+                multiplier *= 2
+            elif(multipliers[i] is Multiplier.TRIPLE_WORD):
+                multiplier *= 3
+
+        points *= multiplier
+        return points
+
+
+    def get_anchor_multipliers(self, xCoords, yCoords):
+        multipliers = []
+
+        if(len(xCoords) != len(yCoords)):
+            assert(False, "get_anchor_multipliers(): xCoords and yCoords should always have the same length")
+
+        for i in xrange(len(xCoords)):
+            multipliers.append(self.b.board[xCoords[i]][yCoords[i]].multiplier)
+
+        return multipliers
