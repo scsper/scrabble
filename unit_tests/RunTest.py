@@ -30,5 +30,5 @@ print "\n\nRunning the dictionary suite... "
 unittest.TextTestRunner(verbosity=1).run(dictionarySuite)
 
 print "\n\nRunning the manager suite... "
-unittest.TextTestRunner(verbosity=2).run(managerSuite)
+unittest.TextTestRunner(verbosity=1).run(managerSuite)
 
