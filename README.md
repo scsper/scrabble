@@ -1,6 +1,43 @@
-scrabble
+Scrabble
 ========
 
+### Getting Started
+
+To create your dev environment, you need to download:
+ * [Virtual Box](https://www.virtualbox.org/)
+ * [Vagrant](http://www.vagrantup.com/)
+
+After installing both, go inside scrabble/ and run:
+
+```
+$ vagrant up
+```
+
+This command will ask Vagrant to download the Ubuntu image and install all the necessary packages for you.
+
+To get into the environment, run:
+
+```
+$ vagrant ssh
+$ cd /vagrant
+```
+
+To complete the setup, run:
+```
+$ sudo apt-get install make
+$ make install
+$ make set_python_path
+```
+
+After you're in the environment, you can:
+
+```
+$ make test // runs unit tests
+```
+
+
+Design
+========
 ### Board: singleton
 - multi-dimensional list of board positions
 
