@@ -5,7 +5,7 @@ from enum import ErrorCodes
 
 class TestTilebag(unittest.TestCase):
     def setUp(self):
-        self.tilebag = Tilebag("mocks/mockTileset.txt")
+        self.tilebag = Tilebag("unit_tests/mocks/mockTileset.txt")
 
 
     def test_constructor(self):
