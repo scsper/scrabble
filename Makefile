@@ -15,3 +15,11 @@ set_python_path:
 test:
 	python unit_tests/RunTest.py
 	make clean
+
+run:
+	python run.py
+	make clean
+
+coverage:
+	coverage run --source='.' unit_tests/RunTest.py
+	coverage html
