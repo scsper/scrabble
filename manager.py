@@ -129,7 +129,7 @@ class Manager(object):
                 tiles.append(self.b.board[x][y].tile)
 
         else:
-            assert(false, "invalid direction passed into '_scan()'.  value should be up down left or right.")
+            assert(False, "invalid direction passed into '_scan()'.  value should be up down left or right.")
 
         return tiles
 

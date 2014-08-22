@@ -333,10 +333,6 @@ class TestManager(unittest.TestCase):
 
         wordsAndPoints = self.manager.form_words()
         words, points, garbage = zip(*wordsAndPoints) # unzip the tuple
-        print words
-
-        print points
-
 
         self.assertTrue(len(words) == 1, "There should have only been one word found")
         self.assertTrue(words[0] == "ream", "'ream' was not found")
@@ -372,10 +368,6 @@ class TestManager(unittest.TestCase):
         wordsAndPoints = self.manager.form_words()
 
         words, points, garbage = zip(*wordsAndPoints) # unzip the tuple
-        print words
-
-        print points
-
 
         self.assertTrue(len(words) == 1, "There should have only been one word found")
         self.assertTrue(words[0] == "dream", "'dream' was not found")
@@ -408,10 +400,6 @@ class TestManager(unittest.TestCase):
         self.manager.check_connectivity()
         wordsAndPoints = self.manager.form_words()
         words, points, garbage = zip(*wordsAndPoints) # unzip the tuple
-        print words
-
-        print points
-
 
         self.assertTrue(len(words) == 2, "There should have been two words found")
         self.assertTrue(words[0] == "ages", "'ages' was not found")
@@ -445,8 +433,6 @@ class TestManager(unittest.TestCase):
         self.manager.check_connectivity()
         wordsAndPoints = self.manager.form_words()
         words, points, garbage = zip(*wordsAndPoints) # unzip the tuple
-        print words
-        print points
 
         self.assertTrue(len(words) == 2, "There should have been two words found")
         self.assertTrue(words[0] == "rage", "'rage' was not found")
@@ -486,8 +472,6 @@ class TestManager(unittest.TestCase):
         self.manager.check_connectivity()
         wordsAndPoints = self.manager.form_words()
         words, points, garbage = zip(*wordsAndPoints) # unzip the tuple
-        print words
-        print points
 
         self.assertTrue(len(words) == 4, "There should have been four words found")
         self.assertTrue(words[0] == "ah", "'ah' was not found")
@@ -524,8 +508,6 @@ class TestManager(unittest.TestCase):
 
         wordsAndPoints = self.manager.form_words()
         words, points, garbage = zip(*wordsAndPoints) # unzip the tuple
-        print words
-        print points
 
         self.assertTrue(len(words) == 1, "There should have only been one word found")
         self.assertTrue(words[0] == "ranking", "'ranking' was not found")
