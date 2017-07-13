@@ -11,8 +11,6 @@ function bag(state = [], action) {
     default:
       return state;
   }
-
-  return state;
 }
 
 function values(state = {}, action) {
