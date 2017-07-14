@@ -12,4 +12,8 @@ function board(state = [], action) {
   }
 }
 
+export const selectors = {
+  getBoard: (state) => state
+}
+
 export default board;
