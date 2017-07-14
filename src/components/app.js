@@ -1,15 +1,6 @@
 import React from 'react';
-import {getBoard} from '../reducers';
-import {connect} from 'react-redux';
+import Board from './board';
 
-function App() {
-  return <div>Hello world!</div>;
+export default function App() {
+  return <Board />;
 }
-
-function mapStateToProps(state) {
-  return {
-    board: getBoard(state)
-  };
-}
-
-export default connect(mapStateToProps)(App);

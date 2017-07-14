@@ -1,0 +1,23 @@
+.cell {
+  height: 75px;
+  width: 75px;
+  border: 1px solid black;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.double-word {
+  background-color: #fdaccb;
+}
+
+.double-letter {
+  background-color: #aedbed;
+}
+
+.triple-word {
+  background-color: #f14264;
+}
+
+.triple-letter {
+  background-color: #045be3;
+}
