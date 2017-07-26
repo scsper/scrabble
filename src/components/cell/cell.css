@@ -4,8 +4,10 @@
   border: 1px solid black;
   display: inline-block;
   vertical-align: middle;
+}
+
+.letter {
   text-align: center;
-  line-height: 75px;
   font-size: 20pt;
   text-transform: uppercase;
 }

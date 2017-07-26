@@ -14,7 +14,9 @@ export default function Cell({cell, row, col}) {
 
   return (
     <div className={classNames} id={`${row}_${col}`}>
-      {cell.letter !== '' ? cell.letter : ''}
+      <div className="letter">
+        {cell.letter || ''}
+      </div>
     </div>
   );
 }
