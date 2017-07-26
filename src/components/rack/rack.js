@@ -11,8 +11,7 @@ export function Rack({id, letters, points}) {
       <div className="score">
         {'Score: ' + points}
       </div>
-      {letters.length > 0 ? letters.map((l, index) => <Cell row="0" col={index} cell={newCell(l)} />) : null}
-      {[...Array(7 - letters.length).keys()].map(col => <Cell row="0" col={col + letters.length} cell={newCell()} />)}
+      {letters.map((l, index) => <Cell row="0" col={index} cell={newCell(l)} />)}
     </div>
   );
 }
