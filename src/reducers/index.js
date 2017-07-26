@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 import {createSelector} from 'reselect';
 import board, {selectors as boardSelectors} from './board';
-import tiles from './tiles';
-import players from './players';
+import tiles, {selectors as tilesSelectors} from './tiles';
+import players, {selectors as playerSelectors} from './players';
 import turn from './turn';
 
 export default combineReducers({
@@ -26,4 +26,9 @@ export const selectors = createSelector(
 */
 
 // results in an api like getBoard(state);
-export const getBoard = (state) => boardSelectors.getBoard(state.board);
+export const getBoard = state => boardSelectors.getBoard(state.board);
+export const getPlayers = state => playerSelectors.getPlayers(state.players);
+export const getTiles = (state, count) => tilesSelectors.getTiles(state.tiles, count);
+export const getValue = (state, letter) => tilesSelectors.getValue(state.tiles, letter);
+
+

@@ -26,3 +26,8 @@ export default combineReducers({
   bag,
   values
 });
+
+export const selectors = {
+  getTiles: (state, count) => state.bag.slice(0, count),
+  getValues: (state, letter) => state.values[letter]
+};

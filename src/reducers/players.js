@@ -10,9 +10,11 @@ export default function players(state = {}, action) {
         1: player({}, {...action, id: 1}),
         2: player({}, {...action, id: 2})
       };
-
     default:
       return state;
   }
-
 }
+
+export const selectors = {
+  getPlayers: state => state
+};

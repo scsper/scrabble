@@ -10,7 +10,7 @@ export default function player(state = {}, action) {
     case INITIAL_STATE:
       return {
         id: action.id,
-        letters: [],
+        letters: ['a', 'b', 'c'],
         points: 0
       };
     default:
