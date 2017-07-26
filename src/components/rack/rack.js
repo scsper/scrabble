@@ -1,6 +1,5 @@
 import React from 'react';
 import Tile from '../tile';
-import {getValue} from '../../reducers';
 import './rack.css';
 
 export function Rack({id, letters, points}) {
@@ -13,7 +12,7 @@ export function Rack({id, letters, points}) {
         {'Score: ' + points}
       </div>
       <div className="tiles">
-        {letters.map((l, index) => <Tile key={index} letter={l} />)}
+        {letters.map((l, index) => <Tile key={index} id={`${id}_${index}`} letter={l} />)}
       </div>
     </div>
   );
