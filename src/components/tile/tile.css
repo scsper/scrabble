@@ -1,11 +1,7 @@
-.rack {
-  width: 1155px;
-  display: block;
-}
-
-.tiles {
-  width: 490px;
+.tile {
+  width: 70px;
   height: 70px;
+  display: inline-block;
   border: 1px solid black;
   vertical-align: middle;
 }

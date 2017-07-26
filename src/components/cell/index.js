@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import './cell.css';
-import {Multipliers, CellStates} from '../../constants';
+import {Multipliers} from '../../constants';
 
 export default function Cell({cell, row, col}) {
   const classNames = classnames({
@@ -21,10 +21,3 @@ export default function Cell({cell, row, col}) {
   );
 }
 
-export function newCell(letter = '') {
-  return {
-    status: letter === '' ? CellStates.EMPTY : CellStates.FULL,
-    multiplier: 0,
-    letter: letter
-  };
-}
