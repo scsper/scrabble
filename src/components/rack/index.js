@@ -7,7 +7,7 @@ import './racks.css';
 function Racks({players}) {
   return (
     <div className="racks">
-      {players.map(player => <Rack id={player.id} letters={player.letters} points={player.points} />)}
+      {Object.keys(players).map(id => <Rack id={id} letters={players[id].letters} points={players[id].points} />)}
     </div>
   );
 }

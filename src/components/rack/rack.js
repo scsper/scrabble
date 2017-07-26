@@ -1,5 +1,6 @@
 import React from 'react';
 import Cell, {newCell} from '../cell';
+import Tile from '../tile';
 import './rack.css';
 
 export function Rack({id, letters, points}) {
