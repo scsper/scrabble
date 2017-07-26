@@ -28,7 +28,6 @@ export const selectors = createSelector(
 // results in an api like getBoard(state);
 export const getBoard = state => boardSelectors.getBoard(state.board);
 export const getPlayers = state => playerSelectors.getPlayers(state.players);
+export const getLetters = (state, player) => playerSelectors.getLetters(state.players, player);
 export const getTiles = (state, count) => tilesSelectors.getTiles(state.tiles, count);
 export const getValue = (state, letter) => tilesSelectors.getValue(state.tiles, letter);
-
-

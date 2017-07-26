@@ -1,5 +1,5 @@
 import {ActionTypes} from '../constants';
-import player from './player';
+import player, {selectors as playerSelectors} from './player';
 
 const {INITIAL_STATE} = ActionTypes;
 
@@ -16,5 +16,6 @@ export default function players(state = {}, action) {
 }
 
 export const selectors = {
-  getPlayers: state => state
+  getPlayers: state => state,
+  getLetters: (state, id) => playerSelectors.getLetters(state[id])
 };

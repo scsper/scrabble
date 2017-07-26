@@ -17,3 +17,9 @@ export default function player(state = {}, action) {
       return state;
   }
 }
+
+export const selectors = {
+  getId: state => state.id,
+  getLetters: state => state.letters,
+  getPoints: state => state.points
+};

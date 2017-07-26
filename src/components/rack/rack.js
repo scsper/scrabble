@@ -1,6 +1,6 @@
 import React from 'react';
-import Cell, {newCell} from '../cell';
 import Tile from '../tile';
+import {getValue} from '../../reducers';
 import './rack.css';
 
 export function Rack({id, letters, points}) {
@@ -12,7 +12,9 @@ export function Rack({id, letters, points}) {
       <div className="score">
         {'Score: ' + points}
       </div>
-      {letters.map((l, index) => <Cell row="0" col={index} cell={newCell(l)} />)}
+      <div className="tiles">
+        {letters.map((l, index) => <Tile key={index} letter={l} />)}
+      </div>
     </div>
   );
 }
