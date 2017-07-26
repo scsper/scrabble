@@ -1,20 +1,27 @@
 import React from 'react';
+import {getValue} from '../../reducers';
 import {connect} from 'react-redux';
-import {getTiles} from '../../reducers';
 import './tile.css';
 
-function Tile({letter}) {
+function Tile({letter, value}) {
   return (
     <div className="tile">
-      {letter}
+      <div className="value">
+        {value}
+      </div>
+      <div className="letter">
+        {letter}
+      </div>
     </div>
   );
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, l) {
+  console.log(l);
   return {
-    tile: getTiles(state, 1)
+    letter: l.letter,
+    value: getValue(state, l.letter)
   };
 }
 
-export default connect(mapStateToProps)(Tile);
+export default connect(mapStateToProps)(Tile)
