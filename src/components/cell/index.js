@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import './cell.css';
-import {Multipliers,CellStates} from '../../constants';
+import {Multipliers, CellStates} from '../../constants';
 
 export default function Cell({cell, row, col}) {
   const classNames = classnames({
@@ -13,13 +13,15 @@ export default function Cell({cell, row, col}) {
   });
 
   return (
-    <div className={classNames} id={`${row}_${col}`}>{cell.letter!==''?cell.letter:''}</div>
+    <div className={classNames} id={`${row}_${col}`}>
+      {cell.letter !== '' ? cell.letter : ''}
+    </div>
   );
 }
 
-export function newCell(letter='') {
+export function newCell(letter = '') {
   return {
-    status: (letter==='' ? CellStates.EMPTY : CellStates.FULL),
+    status: letter === '' ? CellStates.EMPTY : CellStates.FULL,
     multiplier: 0,
     letter: letter
   };
