@@ -20,4 +20,3 @@ export default function Cell({cell, row, col}) {
     </div>
   );
 }
-
